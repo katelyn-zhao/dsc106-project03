@@ -77,7 +77,7 @@ function updateChart() {
 
     const dataset = datasetSelect === "fTempData" ? fTempData : mTempData;
 
-    if (!columnSelect) return; 
+    if (!columnSelect) return;
 
     if (minTime > maxTime) {
         document.getElementById("minTime").value = maxTime;
@@ -91,7 +91,7 @@ function updateChart() {
 
     const width = 1000;
     const height = 500;
-    const margin = { top: 50, right: 120, bottom: 60, left: 80 };
+    const margin = { top: 50, right: 120, bottom: 60, left: 80 }; 
 
     d3.select("#chart").select("svg").remove();
 
@@ -124,6 +124,32 @@ function updateChart() {
         .attr("stroke-width", 2)
         .attr("d", line);
 
+    svg.selectAll("circle")
+        .data(filteredData)
+        .enter()
+        .append("circle")
+        .attr("cx", d => xScale(d.minute))
+        .attr("cy", d => yScale(d[columnSelect]))
+        .attr("r", 1.5)
+        .attr("fill", color)
+        .attr("stroke", "none")
+        .attr("stroke-width", 5)
+        .on("mouseover", function (event, d) {
+            d3.select("#tooltip")
+                .style("display", "block")
+                .style("left", event.pageX + 10 + "px")
+                .style("top", event.pageY - 20 + "px")
+                .html(`<strong>Time:</strong> ${d.minute} min<br><strong>Temp:</strong> ${d[columnSelect]} °C`);
+        })
+        .on("mousemove", function (event) {
+            d3.select("#tooltip")
+                .style("left", event.pageX + 10 + "px")
+                .style("top", event.pageY - 20 + "px");
+        })
+        .on("mouseout", function () {
+            d3.select("#tooltip").style("display", "none");
+        });
+
     svg.append("g")
         .attr("transform", `translate(0,${height})`)
         .call(d3.axisBottom(xScale).ticks(10));
@@ -141,16 +167,16 @@ function updateChart() {
     svg.append("text")
         .attr("transform", "rotate(-90)")
         .attr("x", -height / 2)
-        .attr("y", -50) 
+        .attr("y", -50)
         .attr("text-anchor", "middle")
         .style("font-size", "16px")
         .text("Temperature (°C)");
 
     svg.append("text")
         .attr("x", width / 2)
-        .attr("y", -5)
+        .attr("y", -20)
         .attr("text-anchor", "middle")
-        .style("font-size", "16px")
+        .style("font-size", "18px")
         .text(`Temperature Data: ${datasetSelect} - ${columnSelect} (${minTime} to ${maxTime} min)`);
 }
 
@@ -159,4 +185,3 @@ document.addEventListener("DOMContentLoaded", async () => {
     await loadData();
     createChart();
 });
-
