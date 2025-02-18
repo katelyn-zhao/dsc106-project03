@@ -11,22 +11,23 @@
 <body>
     <h2>Mouse Temperature Line Chart</h2>
 
-    <label for="datasetSelect">Choose Dataset:</label>
-    <select id="datasetSelect">
-        <option value="fTempData">Female Data</option>
-        <option value="mTempData">Male Data</option>
-    </select>
+    <div class="controls">
+        <label for="femaleSelect">Choose Female Column:</label>
+        <select id="femaleSelect"></select>
 
-    <label for="columnSelect">Choose Column:</label>
-    <select id="columnSelect"></select>
+        <label for="maleSelect">Choose Male Column:</label>
+        <select id="maleSelect"></select>
+    </div>
 
-    <label for="minTime">Start Time:</label>
-    <input type="range" id="minTime" min="0" max="20160" value="0" step="1">
-    <span id="minTimeValue">0</span> minutes
+    <div class="controls">
+        <label for="minTime">Start Time:</label>
+        <input type="range" id="minTime" min="0" max="20160" value="0" step="1">
+        <span id="minTimeValue">0</span> minutes
 
-    <label for="maxTime">End Time:</label>
-    <input type="range" id="maxTime" min="0" max="20160" value="20160" step="1">
-    <span id="maxTimeValue">20160</span> minutes
+        <label for="maxTime">End Time:</label>
+        <input type="range" id="maxTime" min="0" max="20160" value="20160" step="1">
+        <span id="maxTimeValue">20160</span> minutes
+    </div>
 
     <div id="tooltip" style="position: absolute; background: white; border: 1px solid black; padding: 5px; border-radius: 5px; display: none;"></div>
 
