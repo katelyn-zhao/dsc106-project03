@@ -131,7 +131,7 @@ function updateChart() {
 
     const width = 1000;
     const height = 500;
-    const margin = { top: 50, right: 120, bottom: 60, left: 80 };
+    const margin = { top: 50, right: 160, bottom: 60, left: 80 };
 
     d3.select("#chart").select("svg").remove();
 
