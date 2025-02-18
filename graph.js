@@ -311,3 +311,4 @@ document.addEventListener("DOMContentLoaded", async () => {
     await loadData();
     createChart();
 });
+
