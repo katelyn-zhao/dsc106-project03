@@ -8,3 +8,7 @@ body {
     margin: auto;
     padding: 1em;
 }
+
+.controls {
+    margin: 10px;
+}
